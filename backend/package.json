@@ -1,1 +1,56 @@
-
+{
+  "name": "EasyClick",
+  "version": "1.0.0",
+  "description": "An E-commerce System",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-specifier-resolution=node ./src/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ismail61/EasyClick.git"
+  },
+  "keywords": [
+    "ecommerce"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ismail61/EasyClick/issues"
+  },
+  "homepage": "https://github.com/ismail61/EasyClick#readme",
+  "dependencies": {
+    "@bangladeshi/bangladesh-address": "^1.0.4",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.2",
+    "cloudinary": "^1.28.1",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^6.3.0",
+    "forever": "^4.0.3",
+    "helmet": "^5.0.2",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.2.3",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "node-fetch": "^2.6.7",
+    "nodemailer": "^6.7.5",
+    "request": "^2.88.2",
+    "slugify": "^1.6.5",
+    "socket.io": "^4.5.0",
+    "uuid": "^8.3.2",
+    "validator": "^13.7.0",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
