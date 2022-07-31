@@ -4,10 +4,8 @@ const headerOptions = {
   "Content-Type": "application/json",
 },
   admin = Cookies.get("admin"),
-  // baseUrl = "http://localhost:3690/XYZ!@!/admin",
-  // chatUrl = "http://localhost:3690",
-  baseUrl = "https://api.esyclick.com/XYZ!@!/admin",
-  chatUrl = "https://api.esyclick.com",
+  baseUrl = "http://localhost:3690/XYZ!@!/admin",
+  chatUrl = "http://localhost:3690",
   legal_form_options = [
     { name: "Limited liability company" },
     { name: "Public Company" },
