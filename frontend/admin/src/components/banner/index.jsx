@@ -1,0 +1,1 @@
+export {default as BannerFactory} from './BannerFactory';

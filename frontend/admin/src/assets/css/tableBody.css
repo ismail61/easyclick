@@ -1,0 +1,25 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+  }
+  
+  
+  td, th {
+    border: 1px solid rgba(0, 0, 0, 0.76) ;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  th {
+    font-weight: 700 !important;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #e3e3e3;
+  }
+  
+  th:last-child{
+    text-align: right;
+  }
