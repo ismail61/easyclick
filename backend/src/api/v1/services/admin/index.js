@@ -9,3 +9,4 @@ export * from './email.services';
 export * from './sms.services';
 export * from './delivery.fee.services';
 export * from './freeShipping.services';
+export * from './merchant.services';

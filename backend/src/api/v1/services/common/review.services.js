@@ -1,3 +1,4 @@
+import { Product } from "../../mongodb/admin";
 import { Order, Review } from "../../mongodb/common";
 import { Customer } from "../../mongodb/customer";
 

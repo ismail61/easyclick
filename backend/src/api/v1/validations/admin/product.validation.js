@@ -99,10 +99,6 @@ const productValidation = ({
                                 "any.required": `Image URL is Required.`
                             }),
                     })),
-                others: Joi.string()
-                    .messages({
-                        "string.base": `Others should be type of String`,
-                    }),
                 sizes: Joi.array()
                     .items(Joi.object().keys({
                         pricing: Joi.object().keys({

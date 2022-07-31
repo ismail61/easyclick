@@ -9,10 +9,9 @@ const signInValidation = ({ email, password }) => {
                 "string.email": `Please enter Correct Email ["com", "net", "in", "co"].`,
                 "any.required": `Invalid Credentials.`,
             }),
-        password: Joi.string().regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/).min(6).required()
+        password: Joi.string().min(6).required()
             .messages({
                 "string.base": `Invalid Credentials.`,
-                "string.pattern.base": `Invalid Credentials.`,
                 "string.empty": `Invalid Credentials.`,
                 "any.required": `Password is Required.`,
             }),

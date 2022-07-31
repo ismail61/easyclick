@@ -46,7 +46,7 @@ export const getWebsiteHomePageCategory = async (query) => {
 // Get all home page category service with out children
 export const getWebsiteHomePageCategoryWithoutChildren = async (query) => {
     try {
-        return await Category.find(query).lean().select('slug description image');
+        return await Category.find(query).lean().select('slug description image name');
     } catch (err) {
         console.log(err);
     }

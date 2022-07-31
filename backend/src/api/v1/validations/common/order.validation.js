@@ -2,7 +2,6 @@ import Joi from "joi";
 
 const orderValidation = ({
     products,
-    payment_information,
     billing_address,
     shipping_address,
 }) => {
@@ -67,21 +66,6 @@ const orderValidation = ({
         })
     const joiSchema = Joi.object().keys({
         products: Joi.array().items(productSchema).min(1),
-        payment_information: Joi.object().keys({
-            method: Joi.string().required()
-                .messages({
-                    "string.base": `Payment Method should be type of String`,
-                    "any.required": `Payment Method is Required.`
-                }),
-            status: Joi.string().required()
-                .messages({
-                    "string.base": `Payment Status should be type of String`,
-                    "any.required": `Payment Status is Required.`
-                }),
-        }).required()
-            .messages({
-                "any.required": `Payment Information is Required.`
-            }),
         billing_address: Joi.string().hex().length(24).required()
             .messages({
                 "string.base": `Billing Address ID should be type of ObjectID`,
@@ -96,7 +80,6 @@ const orderValidation = ({
 
     const { value, error } = joiSchema.validate({
         products,
-        payment_information,
         billing_address,
         shipping_address,
     }, {

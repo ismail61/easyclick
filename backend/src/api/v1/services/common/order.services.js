@@ -1,12 +1,13 @@
 import { Order } from "../../mongodb/common"
-import { Customer } from '../../mongodb/customer'
+import { Customer, Wallet } from '../../mongodb/customer'
 import { globalErrorHandler } from "../../utils"
 import _ from 'lodash'
-import { cartItemDelete, getSingleProduct } from "../customer"
+import { cartItemDelete } from "../customer"
 import { Product } from "../../mongodb/admin"
-import { updateProductQuantity } from "../admin/product.services"
+import { getProduct, updateProductQuantity } from "../admin/product.services"
 
 export const createCustomerOrder = async (user_id, data, res) => {
+    const { merchant_discount } = data;
     try {
         const newOrder = await new Order(data);
         const savedOrder = await newOrder.save()
@@ -14,6 +15,7 @@ export const createCustomerOrder = async (user_id, data, res) => {
         const { products } = data;
         productQuantityUpdate(products, newOrder._id);
         deleteFromCart(user_id, products);
+        pushWalletAmount(user_id, newOrder._id, merchant_discount)
         return savedOrder;
     } catch (err) {
         console.log(err);
@@ -21,9 +23,32 @@ export const createCustomerOrder = async (user_id, data, res) => {
     }
 }
 
+const pushWalletAmount = async (user_id, order_id, merchant_discount) => {
+    const doesMerchantWallet = await Wallet.findOne({ user_id });
+    if (doesMerchantWallet) {
+        doesMerchantWallet.total_amount += merchant_discount;
+        doesMerchantWallet.transactions?.push({
+            amount: merchant_discount,
+            order_id
+        });
+        await Wallet.findOneAndUpdate({ user_id }, doesMerchantWallet).lean();
+    } else {
+        await Wallet.create({
+            user_id,
+            total_amount: merchant_discount,
+            transactions: [
+                {
+                    amount: merchant_discount,
+                    order_id
+                }
+            ]
+        })
+    }
+}
+
 const productQuantityUpdate = async (products, order_id) => {
     await products?.forEach(async (orderedSingleProduct) => {
-        const product = await getSingleProduct({ _id: orderedSingleProduct?.product_id });
+        const product = await getProduct({ _id: orderedSingleProduct?.product_id });
         product?.variant_stock_price?.forEach(variant => {
             if (variant.color_family === orderedSingleProduct?.color) {
                 variant?.sizes?.forEach(nestedSize => {
@@ -51,6 +76,7 @@ const deleteFromCart = async (user_id, products) => {
         await cartItemDelete(user_id, item);
     })
 }
+
 const pushCustomerOrders = async (user_id, order_id) => {
     let ordersArray = await Customer.findOne({ _id: user_id }).lean().select('orders -_id') || [];
     const { orders } = ordersArray;
